@@ -5,7 +5,10 @@ import 'icon_content.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
+
+enum Gender { female, male }
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -15,6 +18,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedgender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +30,29 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedgender = Gender.male;
+                      });
+                    },
+                    child: ReusableCard(
+                      colour: selectedgender == Gender.male ? activeCardColor : inactiveCardColor,
+                      cardChild: IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: IconContent(icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedgender = Gender.female;
+                      });
+                    },
+                    child: ReusableCard(
+                      colour: selectedgender == Gender.female ? activeCardColor : inactiveCardColor,
+                      cardChild: IconContent(icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                    ),
                   ),
                 ),
               ],
