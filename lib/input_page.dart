@@ -21,6 +21,25 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedgender;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  changeGender(Gender setgender) {
+    print("change Gender $setgender");
+    // setState(() {
+    //   selectedgender = setgender;
+    // });
+  }
+
+  setGender() {
+    print("set Gender");
+    // setState(() {
+    //   selectedgender = setgender;
+    // });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("BMI Calculator")),
@@ -31,21 +50,20 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    onPress: () {
-                      setState(() {
-                        selectedgender = Gender.male;
-                      });
-                    },
+                    onPress: () => changeGender(Gender.male),
                     colour: selectedgender == Gender.male ? activeCardColor : inactiveCardColor,
                     cardChild: IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
+                    // onPress: () => changeGender(Gender.female),
                     onPress: () {
-                      setState(() {
-                        selectedgender = Gender.female;
-                      });
+                      print("SET");
+                      // changeGender(Gender.female);
+                      // setState(() {
+                      //   selectedgender = Gender.female;
+                      // });
                     },
                     colour: selectedgender == Gender.female ? activeCardColor : inactiveCardColor,
                     cardChild: IconContent(icon: FontAwesomeIcons.venus, label: "FEMALE"),
@@ -54,7 +72,9 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Expanded(child: ReusableCard(colour: activeCardColor)),
+          Expanded(
+            child: ReusableCard(colour: activeCardColor, cardChild: Text("WWW")),
+          ),
           Expanded(
             child: Row(
               children: <Widget>[
