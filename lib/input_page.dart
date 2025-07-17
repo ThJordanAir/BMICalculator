@@ -21,25 +21,6 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedgender;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  changeGender(Gender setgender) {
-    print("change Gender $setgender");
-    // setState(() {
-    //   selectedgender = setgender;
-    // });
-  }
-
-  setGender() {
-    print("set Gender");
-    // setState(() {
-    //   selectedgender = setgender;
-    // });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("BMI Calculator")),
@@ -50,7 +31,11 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    onPress: () => changeGender(Gender.male),
+                    onPress: () {
+                      setState(() {
+                        selectedgender = Gender.male;
+                      });
+                    },
                     colour: selectedgender == Gender.male ? activeCardColor : inactiveCardColor,
                     cardChild: IconContent(icon: FontAwesomeIcons.mars, label: "MALE"),
                   ),
